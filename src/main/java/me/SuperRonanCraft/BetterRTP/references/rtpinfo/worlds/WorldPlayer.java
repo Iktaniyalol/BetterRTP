@@ -67,15 +67,15 @@ public class WorldPlayer implements RTPWorld, RTPWorld_Defaulted {
         setShape(world.getShape());
         if (world instanceof WorldDefault) {
             if (!playerInfo.isTakeMoney()) {
-                setPrice(((WorldDefault) world).getPrice(getWorld().getName()));
-            } else {
                 setPrice(0);
+            } else {
+                setPrice(world.getPrice());
             }
         } else {
             if (!playerInfo.isTakeMoney()) {
-                setPrice(world.getPrice());
-            } else {
                 setPrice(0);
+            } else {
+                setPrice(world.getPrice());
             }
         }
         List<String> list = new ArrayList<>(world.getBiomes());
