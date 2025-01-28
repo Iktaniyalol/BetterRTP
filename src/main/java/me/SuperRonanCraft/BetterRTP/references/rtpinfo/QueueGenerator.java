@@ -7,10 +7,8 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.Nullable;
-
-import com.tcoded.folialib.wrapper.task.WrappedTask;
-
 import io.papermc.lib.PaperLib;
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.player.commands.RTP_SETUP_TYPE;
@@ -28,7 +26,7 @@ public class QueueGenerator {
     public static final int queueMax = 32, queueMin = 2; //Amount to ready up for each rtp world
     private final int queueMaxAttempts = 50;
     boolean generating;
-    private WrappedTask task;
+    private BukkitTask task;
 
     public void unload() {
         if (task != null)
