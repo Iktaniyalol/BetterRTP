@@ -65,10 +65,19 @@ public class WorldPlayer implements RTPWorld, RTPWorld_Defaulted {
         setMaxRadius(world.getMaxRadius());
         setMinRadius(world.getMinRadius());
         setShape(world.getShape());
-        if (world instanceof WorldDefault)
-            setPrice(((WorldDefault) world).getPrice(getWorld().getName()));
-        else
-            setPrice(world.getPrice());
+        if (world instanceof WorldDefault) {
+            if (!playerInfo.isTakeMoney()) {
+                setPrice(((WorldDefault) world).getPrice(getWorld().getName()));
+            } else {
+                setPrice(0);
+            }
+        } else {
+            if (!playerInfo.isTakeMoney()) {
+                setPrice(world.getPrice());
+            } else {
+                setPrice(0);
+            }
+        }
         List<String> list = new ArrayList<>(world.getBiomes());
         if (biomes != null) {
             list.clear();
