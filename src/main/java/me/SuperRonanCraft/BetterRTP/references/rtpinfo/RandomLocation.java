@@ -15,38 +15,46 @@ import java.util.concurrent.CompletableFuture;
 public class RandomLocation {
 
     public static Location generateLocation(RTPWorld rtpWorld) {
+        return generateLocation(rtpWorld, new Random());
+    }
+
+    public static Location generateLocation(RTPWorld rtpWorld, Random random) {
         Location loc;
         switch (rtpWorld.getShape()) {
-            case CIRCLE: loc = generateRound(rtpWorld); break;
+            case CIRCLE: loc = generateRound(rtpWorld, random); break;
             case SQUARE:
-            default: loc = generateSquare(rtpWorld); break;
+            default: loc = generateSquare(rtpWorld, random); break;
         }
         return loc;
     }
 
     private static Location generateSquare(RTPWorld rtpWorld) {
+        return generateSquare(rtpWorld, new Random());
+    }
+
+    private static Location generateSquare(RTPWorld rtpWorld, Random random) {
         //Generate a random X and Z based off the quadrant selected
         int min = rtpWorld.getMinRadius();
         int max = rtpWorld.getMaxRadius() - min;
         int x, z;
-        int quadrant = new Random().nextInt(4);
+        int quadrant = random.nextInt(4);
         try {
             switch (quadrant) {
                 case 0: // Positive X and Z
-                    x = new Random().nextInt(max) + min;
-                    z = new Random().nextInt(max) + min;
+                    x = random.nextInt(max) + min;
+                    z = random.nextInt(max) + min;
                     break;
                 case 1: // Negative X and Z
-                    x = -new Random().nextInt(max) - min;
-                    z = -(new Random().nextInt(max) + min);
+                    x = -random.nextInt(max) - min;
+                    z = -(random.nextInt(max) + min);
                     break;
                 case 2: // Negative X and Positive Z
-                    x = -new Random().nextInt(max) - min;
-                    z = new Random().nextInt(max) + min;
+                    x = -random.nextInt(max) - min;
+                    z = random.nextInt(max) + min;
                     break;
                 default: // Positive X and Negative Z
-                    x = new Random().nextInt(max) + min;
-                    z = -(new Random().nextInt(max) + min);
+                    x = random.nextInt(max) + min;
+                    z = -(random.nextInt(max) + min);
                     break;
             }
         } catch (IllegalArgumentException e) {
@@ -62,13 +70,17 @@ public class RandomLocation {
     }
 
     private static Location generateRound(RTPWorld rtpWorld) {
+        return generateRound(rtpWorld, new Random());
+    }
+
+    private static Location generateRound(RTPWorld rtpWorld, Random random) {
         //Generate a random X and Z based off location on a spiral curve
         int min = rtpWorld.getMinRadius();
         int max = rtpWorld.getMaxRadius() - min;
         int x, z;
 
         double area = Math.PI * (max - min) * (max + min); //of all the area in this donut
-        double subArea = area * new Random().nextDouble(); //pick a random subset of that area
+        double subArea = area * random.nextDouble(); //pick a random subset of that area
 
         double r = Math.sqrt(subArea/Math.PI + min * min); //convert area to radius
         double theta = (r - (int) r) * 2 * Math.PI; //use the remainder as an angle

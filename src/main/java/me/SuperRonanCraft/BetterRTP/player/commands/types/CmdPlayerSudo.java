@@ -34,7 +34,7 @@ public class CmdPlayerSudo implements RTPCommand {
                         null,
                         RTP_TYPE.FORCED,
                         null,
-                        new RTP_PlayerInfo(false, true, false, false, false));
+                        new RTP_PlayerInfo(false, false, false, false, false), true);
             } else if (Bukkit.getPlayer(args[1]) != null)
                 MessagesCore.NOTONLINE.send(sendi, args[1]);
             else
@@ -49,7 +49,7 @@ public class CmdPlayerSudo implements RTPCommand {
                             null,
                             RTP_TYPE.FORCED,
                             null,
-                            new RTP_PlayerInfo(false, true, false, false, false));
+                            new RTP_PlayerInfo(false, false, false, false, false), true);
                 } else
                     MessagesCore.NOTEXIST.send(sendi, args[2]);
             } else if (Bukkit.getPlayer(args[1]) != null)
@@ -75,7 +75,7 @@ public class CmdPlayerSudo implements RTPCommand {
     }
 
     @NotNull public PermissionNode permission() {
-        return PermissionNode.RTP_OTHER;
+        return PermissionNode.RTP_SUDO;
     }
 
     public void usage(CommandSender sendi, String label) {

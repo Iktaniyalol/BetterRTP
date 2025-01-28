@@ -1,5 +1,6 @@
 package me.SuperRonanCraft.BetterRTP.player.rtp;
 
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
 import org.bukkit.Bukkit;
@@ -27,6 +28,7 @@ public class RTPPlayer {
     @Getter WorldPlayer worldPlayer;
     @Getter RTP_TYPE type;
     @Getter int attempts;
+    private Random random;
     //List<Location> attemptedLocations = new ArrayList<>();
 
     RTPPlayer(Player player, RTP settings, WorldPlayer worldPlayer, RTP_TYPE type) {
@@ -34,6 +36,11 @@ public class RTPPlayer {
         this.settings = settings;
         this.worldPlayer = worldPlayer;
         this.type = type;
+        if (worldPlayer.isUsePlayerNameAsSeed()) {
+            this.random = new Random(player.getUniqueId().toString().hashCode());
+        } else {
+            this.random = new Random();
+        }
     }
 
     void randomlyTeleport(CommandSender sendi) {
@@ -59,7 +66,7 @@ public class RTPPlayer {
                     if (queueData != null)
                         loc = queueData.getLocation();
                     else
-                        loc = RandomLocation.generateLocation(worldPlayer);
+                        loc = RandomLocation.generateLocation(worldPlayer, random);
                 }
                 attempts++; //Add an attempt
                 //Load chunk and find out if safe location (asynchronously)

@@ -35,12 +35,15 @@ public class WorldPlayer implements RTPWorld, RTPWorld_Defaulted {
 
     @Getter private boolean setup = false;
 
+    private boolean usePlayerNameAsSeed;
+
     public WorldPlayer(RTPSetupInformation setup_info) {
         this.sendi = setup_info.getSender();
         this.player = setup_info.getPlayer();
         this.world = setup_info.getWorld();
         this.rtp_type = setup_info.getRtp_type();
         this.playerInfo = setup_info.getPlayerInfo();
+        this.usePlayerNameAsSeed = setup_info.isUsePlayerNameAsSeed();
     }
 
     public void setup(String setup_name, RTPWorld world, List<String> biomes) {
@@ -251,4 +254,7 @@ public class WorldPlayer implements RTPWorld, RTPWorld_Defaulted {
         return RTPOnDeath;
     }
 
+    public boolean isUsePlayerNameAsSeed() {
+        return usePlayerNameAsSeed;
+    }
 }

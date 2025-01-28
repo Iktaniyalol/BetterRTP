@@ -16,6 +16,7 @@ public enum PermissionNode implements PermissionCheck {
     INFO("info"),
     UPDATER("updater"),
     RTP_OTHER("player"),
+    RTP_SUDO("sudoplayer"),
     BIOME("biome"),
     WORLD("world"),
     SIGN_CREATE("sign"),

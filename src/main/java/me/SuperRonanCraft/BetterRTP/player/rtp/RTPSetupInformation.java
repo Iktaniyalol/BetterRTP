@@ -21,6 +21,7 @@ public class RTPSetupInformation {
     @Getter @Setter @Nullable private WorldLocation location;
     @Getter @Nullable private final RTP_TYPE rtp_type;
     @Getter private final RTP_PlayerInfo playerInfo;
+    @Getter private boolean usePlayerNameAsSeed;
 
     public RTPSetupInformation(@Nullable World world,
                                @NonNull CommandSender sender,
@@ -60,6 +61,18 @@ public class RTPSetupInformation {
                                @Nullable RTP_TYPE rtp_type,
                                @Nullable WorldLocation location,
                                RTP_PlayerInfo playerInfo) {
+        this(world, sender, player, personalized, biomes, rtp_type, location, playerInfo, false);
+    }
+
+    public RTPSetupInformation(@Nullable World world,
+                               @NonNull CommandSender sender,
+                               @Nullable Player player,
+                               boolean personalized,
+                               @Nullable List<String> biomes,
+                               @Nullable RTP_TYPE rtp_type,
+                               @Nullable WorldLocation location,
+                               RTP_PlayerInfo playerInfo,
+                               boolean usePlayerNameAsSeed) {
         this.world = world;
         this.sender = sender;
         this.player = player;
@@ -72,5 +85,6 @@ public class RTPSetupInformation {
                 this.world = player.getWorld();
         }
         this.playerInfo = playerInfo;
+        this.usePlayerNameAsSeed = usePlayerNameAsSeed;
     }
 }

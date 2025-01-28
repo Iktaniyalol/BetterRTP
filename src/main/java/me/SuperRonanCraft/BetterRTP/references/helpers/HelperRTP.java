@@ -95,6 +95,29 @@ public class HelperRTP {
 
     public static void tp(@NotNull Player player,
                           CommandSender sendi,
+                          @Nullable World world,
+                          List<String> biomes,
+                          RTP_TYPE rtpType,
+                          @Nullable WorldLocation location,
+                          @NotNull RTP_PlayerInfo playerInfo,
+                          boolean usePlayerNameAsSeed) {
+        world = getActualWorld(player, world, location);
+        RTPSetupInformation setup_info = new RTPSetupInformation(
+                world,
+                sendi,
+                player,
+                true,
+                biomes,
+                rtpType,
+                location,
+                playerInfo,
+                usePlayerNameAsSeed
+        );
+        tp(player, sendi, setup_info);
+    }
+
+    public static void tp(@NotNull Player player,
+                          CommandSender sendi,
                           @NotNull RTPSetupInformation setup_info) {
         //RTP request cancelled reason
         WorldPlayer pWorld = getPlayerWorld(setup_info);
