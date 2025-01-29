@@ -6,6 +6,7 @@ permissions:
             betterrtp.world.*: true
             betterrtp.bypass.*: true
             betterrtp.player: true
+            betterrtp.sudoplayer: true
             betterrtp.reload: true
             betterrtp.updater: true
             betterrtp.group.*: true
@@ -26,6 +27,8 @@ permissions:
         default: true
     betterrtp.player:
         description: RTP another player
+    betterrtp.sudoplayer:
+        description: RTP another player using sudo
     betterrtp.biome:
         description: RTP to specific biomes
     betterrtp.sign:
