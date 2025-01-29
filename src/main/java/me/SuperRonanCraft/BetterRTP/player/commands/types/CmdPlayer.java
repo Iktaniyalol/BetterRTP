@@ -36,7 +36,7 @@ public class CmdPlayer implements RTPCommand, RTPCommandHelpable {
                         null,
                         RTP_TYPE.FORCED,
                         null,
-                        new RTP_PlayerInfo(true, true, true, false, false));
+                        new RTP_PlayerInfo(true, false, false, false, false));
             } else if (Bukkit.getPlayer(args[1]) != null)
                 MessagesCore.NOTONLINE.send(sendi, args[1]);
             else
