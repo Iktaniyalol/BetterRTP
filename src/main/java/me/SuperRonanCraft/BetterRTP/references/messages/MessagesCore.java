@@ -17,6 +17,7 @@ public enum MessagesCore {
     FAILED_HUNGER("Failed.Hunger"),
     OTHER_NOTSAFE("Other.NotSafe"),
     OTHER_SUCCESS("Other.Success"),
+    OTHER_SUCCESSSEED("Other.SuccessSeed"),
     OTHER_BIOME("Other.Biome"),
     NOTEXIST("NotExist"),
     RELOAD("Reload"),

@@ -159,8 +159,13 @@ public class RTPTeleport {
 
             } else
                 MessagesCore.SUCCESS_PAID.send(sendi, Arrays.asList(loc, wPlayer, attempts));
-        } else
-            MessagesCore.OTHER_SUCCESS.send(sendi, Arrays.asList(loc, player, attempts));
+        } else {
+            if (wPlayer.isUsePlayerNameAsSeed()) {
+                MessagesCore.OTHER_SUCCESSSEED.send(sendi, Arrays.asList(loc, player, attempts));
+            } else  {
+                MessagesCore.OTHER_SUCCESS.send(sendi, Arrays.asList(loc, player, attempts));
+            }
+        }
     }
 
     private boolean sendStatusMessage() {
