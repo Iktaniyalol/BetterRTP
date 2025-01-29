@@ -150,9 +150,14 @@ public class RTPTeleport {
 
     private void sendSuccessMsg(CommandSender sendi, String player, Location loc, WorldPlayer wPlayer, boolean sameAsPlayer, int attempts) {
         if (sameAsPlayer) {
-            if (wPlayer.getPrice() == 0 || PermissionNode.BYPASS_ECONOMY.check(sendi))
-                MessagesCore.SUCCESS_BYPASS.send(sendi, Arrays.asList(loc, attempts));
-            else
+            if (wPlayer.getPrice() == 0 || !wPlayer.getPlayerInfo().isTakeMoney() || PermissionNode.BYPASS_ECONOMY.check(sendi)) {
+                if (wPlayer.isUsePlayerNameAsSeed()) {
+                    MessagesCore.SUCCESS_TELEPORTSEED.send(sendi, Arrays.asList(loc, attempts));
+                } else  {
+                    MessagesCore.SUCCESS_BYPASS.send(sendi, Arrays.asList(loc, attempts));
+                }
+
+            } else
                 MessagesCore.SUCCESS_PAID.send(sendi, Arrays.asList(loc, wPlayer, attempts));
         } else
             MessagesCore.OTHER_SUCCESS.send(sendi, Arrays.asList(loc, player, attempts));

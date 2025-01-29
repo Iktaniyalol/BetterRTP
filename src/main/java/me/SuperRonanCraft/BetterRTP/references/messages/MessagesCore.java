@@ -8,6 +8,7 @@ import java.util.List;
 public enum MessagesCore {
 
     SUCCESS_PAID("Success.Paid"),
+    SUCCESS_TELEPORTSEED("Success.TeleportSeed"),
     SUCCESS_BYPASS("Success.Bypass"),
     SUCCESS_LOADING("Success.Loading"),
     SUCCESS_TELEPORT("Success.Teleport"),
