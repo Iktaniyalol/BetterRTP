@@ -23,13 +23,14 @@ import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
 
 public class RTPPlayer {
     static int DELTA_FOR_SEARCH_SAFE_POSITION = 16;
+    static int DELIMITER_FOR_ATTEMPTS_FOR_SEARCH_NEW_LOCATION = 4;
 
     @Getter private final Player player;
     private final RTP settings;
     @Getter WorldPlayer worldPlayer;
     @Getter RTP_TYPE type;
     @Getter int attempts;
-    @Getter long seed;
+    Random random;
     Location loc = null;
 
     RTPPlayer(Player player, RTP settings, WorldPlayer worldPlayer, RTP_TYPE type) {
@@ -37,14 +38,13 @@ public class RTPPlayer {
         this.settings = settings;
         this.worldPlayer = worldPlayer;
         this.type = type;
-        this.seed = worldPlayer.isUsePlayerNameAsSeed() ? player.getUniqueId().toString().hashCode() : System.currentTimeMillis();
+        this.random = new Random(worldPlayer.isUsePlayerNameAsSeed() ? player.getUniqueId().toString().hashCode() : System.currentTimeMillis());
     }
 
     void randomlyTeleport(CommandSender sendi) {
         if (attempts >= settings.maxAttempts) //Cancel out, too many tries
             metMax(sendi, player);
         else { //Try again to find a safe location
-            Random random = new Random(seed);
             //Find a location from another Plugin
             RTP_FindLocationEvent event = new RTP_FindLocationEvent(this); //Find an external plugin location
             Bukkit.getServer().getPluginManager().callEvent(event);
@@ -53,6 +53,9 @@ public class RTPPlayer {
                 randomlyTeleport(sendi);
                 attempts++;
                 return;
+            }
+            if (attempts >= settings.maxAttempts / DELIMITER_FOR_ATTEMPTS_FOR_SEARCH_NEW_LOCATION) {
+                loc = null;
             }
             AsyncHandler.async(() -> {
                 if (event.getLocation() != null) // && WorldPlayer.checkIsValid(event.getLocation(), pWorld))
@@ -63,7 +66,7 @@ public class RTPPlayer {
                     if (queueData != null)
                         loc = queueData.getLocation();
                     else {
-                        if (attempts == 0) //First attempt, use random location
+                        if (attempts == 0 || loc == null) //First attempt, use random location, or try to find a safe location
                             loc = RandomLocation.generateLocation(worldPlayer, random);
                         else {
                             // Try to find a safe location around the first attempt
