@@ -124,8 +124,8 @@
             <url>https://repo.extendedclip.com/releases/</url>
         </repository>
         <repository>
-            <id>devmart-public</id>
-            <url>https://nexuslite.gcnt.net/repos/public/</url>
+            <id>william278-releases</id>
+            <url>https://repo.william278.net/releases</url>
         </repository>
     </repositories>
     <dependencies>
@@ -287,6 +287,13 @@
             <version>2.11.6</version>
             <scope>provided</scope>
         </dependency>
+        <!-- HuskClaims (https://www.spigotmc.org/resources/huskclaims.114467/) (Added in 3.6.13)-->
+        <dependency>
+            <groupId>net.william278.huskclaims</groupId>
+            <artifactId>huskclaims-bukkit</artifactId>
+            <version>1.5.2</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Husktown (https://www.spigotmc.org/resources/husktowns.92672/) (Added in 3.4.5)-->
         <dependency>
             <groupId>net.william278.husktowns</groupId>
@@ -311,8 +318,9 @@
             <groupId>com.bekvon.bukkit.residence</groupId>
             <artifactId>Residence</artifactId>
             <version>5.1.4.1</version>
-            <scope>provided</scope>
+            <scope>system</scope>
             <optional>true</optional>
+            <systemPath>${project.basedir}/lib/Residence5.1.4.1.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
